@@ -1,5 +1,19 @@
 const { dirname } = require('path')
 
+/** @type {import("snowpack-dev-server-hooks-plugin").DevServerHooksPluginOptions} */
+const devServerHooksPluginOptions = {
+  devServer: {
+    beforeWriteHead (statusCode, headers) {
+      if (statusCode === 200 && headers['Content-Type'] === 'text/html') {
+        Object.assign(headers, {
+          'Cross-Origin-Opener-Policy': 'same-origin',
+          'Cross-Origin-Embedder-Policy': 'require-corp'
+        })
+      }
+    }
+  }
+}
+
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
   mount: {
@@ -9,7 +23,8 @@ module.exports = {
   },
   plugins: [
     '@snowpack/plugin-svelte',
-    ['@snowpack/plugin-typescript', { args: '--project ./src/main' }]
+    ['@snowpack/plugin-typescript', { args: '--project ./src/main' }],
+    ['snowpack-dev-server-hooks-plugin', devServerHooksPluginOptions]
   ],
   routes: [
     /* Enable an SPA Fallback in development: */
