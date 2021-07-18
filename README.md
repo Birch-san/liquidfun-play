@@ -37,3 +37,8 @@ npm start
 
 Runs the app in the development mode.
 Open http://localhost:8080 to view it in the browser.
+
+## License
+
+This repository is Zlib-licensed (full text in [LICENSE.zlib.txt](LICENSE.zlib.txt)).  
+Additionally, contributions ported from the liquidfun repository are licensed as described in [LICENSE.liquidfun.txt](LICENSE.liquidfun.txt).
